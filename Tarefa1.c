@@ -2,10 +2,10 @@
 #include <stdio.h>
 
 // Definindo linhas e colunas do teclado matricial
-#define ROW_COUNT 4
+#define LINHAS_CONTAGEM 4
 #define COL_COUNT 4
-const uint8_t rows[ROW_COUNT] = {8, 7, 6, 5};
-const uint8_t cols[COL_COUNT] = {4, 3, 2, 28};
+const uint8_t linhas[LINHAS_CONTAGEM] = {8, 7, 6, 5};
+const uint8_t colunas[COL_COUNT] = {4, 3, 2, 28};
 
 // Definições dos LEDs RGB
 #define LED_RED 13
@@ -32,13 +32,13 @@ void setup_input(uint8_t pin) {
 // Configuração inicial dos GPIOs
 void setup_gpio() {
     // Configurando linhas do teclado como saídas
-    for (int i = 0; i < ROW_COUNT; i++) {
-        setup_output(rows[i]);
+    for (int i = 0; i < LINHAS_CONTAGEM; i++) {
+        setup_output(linhas[i]);
     }
 
     // Configurando colunas do teclado como entradas com pull-down
     for (int i = 0; i < COL_COUNT; i++) {
-        setup_input(cols[i]);
+        setup_input(colunas[i]);
     }
 
     // Configurando LEDs RGB como saídas
@@ -77,24 +77,24 @@ void buzzer_tone(uint32_t frequency, uint32_t duration_ms) {
 
 // Função para ler o teclado matricial 4x4
 char read_keypad() {
-    const char keys[ROW_COUNT][COL_COUNT] = {
+    const char keys[LINHAS_CONTAGEM][COL_COUNT] = {
         {'1', '2', '3', 'A'},
         {'4', '5', '6', 'B'},
         {'7', '8', '9', 'C'},
         {'*', '0', '#', 'D'}
     };
 
-    for (int r = 0; r < ROW_COUNT; r++) {
-        gpio_put(rows[r], true); // Ativação da linha
+    for (int r = 0; r < LINHAS_CONTAGEM; r++) {
+        gpio_put(linhas[r], true); // Ativação da linha
         sleep_us(50);
 
         for (int c = 0; c < COL_COUNT; c++) {
-            if (gpio_get(cols[c])) { // Verificação de sinal na coluna
-                gpio_put(rows[r], false); // Desativa a linha
+            if (gpio_get(colunas[c])) { // Verificação de sinal na coluna
+                gpio_put(linhas[r], false); // Desativa a linha
                 return keys[r][c]; // Retorna a tecla pressionada
             }
         }
-        gpio_put(rows[r], false); // Desativa a linha
+        gpio_put(linhas[r], false); // Desativa a linha
     }
 
     return 0;
