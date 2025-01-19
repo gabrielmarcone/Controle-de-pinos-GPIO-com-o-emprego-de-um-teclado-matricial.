@@ -4,8 +4,6 @@
 // Definindo linhas e colunas do teclado matricial
 #define LINHAS_CONTAGEM 4
 #define COL_COUNT 4
-const uint8_t linhas[LINHAS_CONTAGEM] = {8, 7, 6, 5};
-const uint8_t colunas[COL_COUNT] = {4, 3, 2, 28};
 
 // Definições dos LEDs RGB
 #define LED_RED 13
@@ -20,6 +18,9 @@ const uint8_t colunas[COL_COUNT] = {4, 3, 2, 28};
 #define TONE_LOW 500
 #define DURATION_SHORT 500
 #define DURATION_LONG 1000
+
+const uint8_t linhas[LINHAS_CONTAGEM] = {8, 7, 6, 5};
+const uint8_t colunas[COL_COUNT] = {4, 3, 2, 28};
 
 // Função auxiliar para configurar um GPIO como saída
 void setup_output(uint8_t pin) {
