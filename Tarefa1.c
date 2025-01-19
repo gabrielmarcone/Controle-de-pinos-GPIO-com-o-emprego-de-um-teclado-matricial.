@@ -1,6 +1,7 @@
 #include <pico/stdlib.h>
 #include <stdio.h>
 // Definindo linhas e colunas do teclado matricial
+//4 ROWs (linhas) e 4 COL(Colunas)
 #define ROW1 8  
 #define ROW2 7  
 #define ROW3 6  
@@ -11,9 +12,9 @@
 #define COL4 28  
 
 // Definições dos LEDs RGB
-#define LED_RED 13
-#define LED_BLUE 12
 #define LED_GREEN 11
+#define LED_BLUE 12
+#define LED_RED 13
 
 // Definição do buzzer
 #define BUZZER 21
@@ -42,10 +43,10 @@ void setup_gpio() {
 }
 
 // Função para acionar LEDs
-void control_leds(uint8_t red, uint8_t blue, uint8_t green) {
-    gpio_put(LED_RED, red);
+void control_leds(uint8_t green, uint8_t blue, uint8_t red) {
+    gpio_put(LED_RED, green);
     gpio_put(LED_BLUE, blue);
-    gpio_put(LED_GREEN, green);
+    gpio_put(LED_GREEN, red);
 }
 
 // Função para ativar e desativar o buzzer
@@ -83,7 +84,7 @@ char read_keypad() {
 
 int main() {
     stdio_init_all();
-    setup_gpio();
+    setup_gpio(); //chama a funcao que inicializa e configura as GPIOs
 
     while (true) {
         char key = read_keypad(); // Leitura do teclado matricial 4x4
@@ -91,29 +92,30 @@ int main() {
         if (key != 0) { // Se alguma tecla for pressionada
             printf("Tecla pressionada: %c\n", key);
 
-            switch (key) {
-                case '1': // Liga o LED vermelho
-                    control_leds(1, 0, 0);
-                    break;
-                case '2': // Liga o LED azul
-                    control_leds(0, 1, 0);
-                    break;
-                case '3': // Liga o LED verde
+           switch (key) {
+                case 'A': // Liga o LED vermelho
                     control_leds(0, 0, 1);
                     break;
-                case '4': // Liga todos os LEDs
+                case 'B': // Liga o LED azul
+                    control_leds(0, 1, 0);
+                    break;
+                case 'C': // Liga o LED verde
+                    control_leds(1, 0, 0);
+                    break;
+                case 'D': // Liga todos os LEDs
                     control_leds(1, 1, 1);
                     break;
-                case 'A': // Aciona o buzzer
-                    control_buzzer(1);
+                case '#': // Toca tom agudo no buzzer
+                    buzzer_tone(2000, 500); // 2000 Hz por 500 ms
                     break;
-                case 'B': // Desliga o buzzer
-                    control_buzzer(0);
+                case '*': // Toca tom grave no buzzer
+                    buzzer_tone(500, 1000); // 500 Hz por 1000 ms
                     break;
                 default: // Desliga os LEDs
                     control_leds(0, 0, 0);
                     break;
             }
+
         }
 
         sleep_ms(100); // delay para evitar leituras repetidas
