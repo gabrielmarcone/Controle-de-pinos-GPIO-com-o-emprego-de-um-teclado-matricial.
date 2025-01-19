@@ -48,4 +48,3 @@ Este projeto envolve a utilização de um teclado matricial 4x4, LEDs RGB e um b
 - [Kauan Teixeira](https://github.com/kauanth21)
 - [Matheus Amorim](https://github.com/Matheus0o0)
 - [Vitória Tanan](https://github.com/vitoriatanan)
-
