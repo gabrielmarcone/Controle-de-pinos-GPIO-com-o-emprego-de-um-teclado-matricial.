@@ -19,27 +19,49 @@
 // Definição do buzzer
 #define BUZZER 21
 
+uint8_t rows[4] = {ROW1, ROW2, ROW3, ROW4};
+uint8_t cols[4] = {COL1, COL2, COL3, COL4};
+
+//iniciando os gpio's
+void iniciar_gpio(){
+    gpio_init(ROW1); 
+    gpio_init(ROW2); 
+    gpio_init(ROW3); 
+    gpio_init(ROW4);
+
+    gpio_init(COL1); 
+    gpio_init(COL2); 
+    gpio_init(COL3); 
+    gpio_init(COL4);
+
+     gpio_init(LED_RED);
+    gpio_init(LED_BLUE); 
+    gpio_init(LED_GREEN);
+
+    gpio_init(BUZZER);
+
+}
 // Configuração inicial dos GPIOs
 void setup_gpio() {
     // Configurando linhas do teclado como saídas
-    gpio_init(ROW1); gpio_set_dir(ROW1, GPIO_OUT);
-    gpio_init(ROW2); gpio_set_dir(ROW2, GPIO_OUT);
-    gpio_init(ROW3); gpio_set_dir(ROW3, GPIO_OUT);
-    gpio_init(ROW4); gpio_set_dir(ROW4, GPIO_OUT);
+    gpio_set_dir(ROW1, GPIO_OUT);
+    gpio_set_dir(ROW2, GPIO_OUT);
+    gpio_set_dir(ROW3, GPIO_OUT);
+    gpio_set_dir(ROW4, GPIO_OUT);
 
     // Configurando colunas do teclado como entradas com pull-down
-    gpio_init(COL1); gpio_set_dir(COL1, GPIO_IN); gpio_pull_down(COL1);
-    gpio_init(COL2); gpio_set_dir(COL2, GPIO_IN); gpio_pull_down(COL2);
-    gpio_init(COL3); gpio_set_dir(COL3, GPIO_IN); gpio_pull_down(COL3);
-    gpio_init(COL4); gpio_set_dir(COL4, GPIO_IN); gpio_pull_down(COL4);
+    gpio_set_dir(COL1, GPIO_IN); gpio_pull_down(COL1);
+    gpio_set_dir(COL2, GPIO_IN); gpio_pull_down(COL2);
+    gpio_set_dir(COL3, GPIO_IN); gpio_pull_down(COL3);
+    gpio_set_dir(COL4, GPIO_IN); gpio_pull_down(COL4);
 
     // Configurando LEDs RGB como saidas
-    gpio_init(LED_RED); gpio_set_dir(LED_RED, GPIO_OUT);
-    gpio_init(LED_BLUE); gpio_set_dir(LED_BLUE, GPIO_OUT);
-    gpio_init(LED_GREEN); gpio_set_dir(LED_GREEN, GPIO_OUT);
+    gpio_set_dir(LED_RED, GPIO_OUT);
+    gpio_set_dir(LED_BLUE, GPIO_OUT);
+    gpio_set_dir(LED_GREEN, GPIO_OUT);
 
     // Configurando buzzer como saída
-    gpio_init(BUZZER); gpio_set_dir(BUZZER, GPIO_OUT);
+    gpio_set_dir(BUZZER, GPIO_OUT);
 }
 
 // Função para acionar LEDs
@@ -63,8 +85,7 @@ char read_keypad() {
         {'*', '0', '#', 'D'}
     };
 
-    uint8_t rows[4] = {ROW1, ROW2, ROW3, ROW4};
-    uint8_t cols[4] = {COL1, COL2, COL3, COL4};
+
 
     for (int r = 0; r < 4; r++) {
         gpio_put(rows[r], true); // ativação da linha
@@ -84,7 +105,8 @@ char read_keypad() {
 
 int main() {
     stdio_init_all();
-    setup_gpio(); //chama a funcao que inicializa e configura as GPIOs
+    iniciar_gpio();//chama a função que inicializa as GPIOs
+    setup_gpio(); //chama a funcao que configura as GPIOs
 
     while (true) {
         char key = read_keypad(); // Leitura do teclado matricial 4x4
@@ -106,10 +128,10 @@ int main() {
                     control_leds(1, 1, 1);
                     break;
                 case '#': // Toca tom agudo no buzzer
-                    buzzer_tone(2000, 500); // 2000 Hz por 500 ms
+                    control_buzzer(1); // 2000 Hz por 500 ms
                     break;
                 case '*': // Toca tom grave no buzzer
-                    buzzer_tone(500, 1000); // 500 Hz por 1000 ms
+                    control_buzzer(0); // 500 Hz por 1000 ms
                     break;
                 default: // Desliga os LEDs
                     control_leds(0, 0, 0);
