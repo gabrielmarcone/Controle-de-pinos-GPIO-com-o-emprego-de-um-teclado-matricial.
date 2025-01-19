@@ -1,4 +1,4 @@
-# Controle de Pinos GPIO com o Emprego de um Teclado Matricial
+<h1 align="center"> Controle de Pinos GPIO com o Emprego de um Teclado Matricial </h1>
 
 ## 📋 Sobre
 <p align="justify"> 
