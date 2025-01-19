@@ -92,22 +92,22 @@ int main() {
             printf("Tecla pressionada: %c\n", key);
 
             switch (key) {
-                case '1': // Liga o LED vermelho
+                case 'A': // Liga o LED vermelho
                     control_leds(1, 0, 0);
                     break;
-                case '2': // Liga o LED azul
+                case 'B': // Liga o LED azul
                     control_leds(0, 1, 0);
                     break;
-                case '3': // Liga o LED verde
+                case 'C': // Liga o LED verde
                     control_leds(0, 0, 1);
                     break;
-                case '4': // Liga todos os LEDs
+                case 'D': // Liga todos os LEDs
                     control_leds(1, 1, 1);
                     break;
-                case 'A': // Aciona o buzzer
+                case '#': // Aciona o buzzer
                     control_buzzer(1);
                     break;
-                case 'B': // Desliga o buzzer
+                case '*': // Desliga o buzzer
                     control_buzzer(0);
                     break;
                 default: // Desliga os LEDs
