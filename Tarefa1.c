@@ -92,7 +92,7 @@ int main() {
         if (key != 0) { // Se alguma tecla for pressionada
             printf("Tecla pressionada: %c\n", key);
 
-            switch (key) {
+           switch (key) {
                 case 'A': // Liga o LED vermelho
                     control_leds(0, 0, 1);
                     break;
@@ -105,16 +105,17 @@ int main() {
                 case 'D': // Liga todos os LEDs
                     control_leds(1, 1, 1);
                     break;
-                case '#': // Aciona o buzzer
-                    control_buzzer(1);
+                case '#': // Toca tom agudo no buzzer
+                    buzzer_tone(2000, 500); // 2000 Hz por 500 ms
                     break;
-                case '*': // Desliga o buzzer
-                    control_buzzer(0);
+                case '*': // Toca tom grave no buzzer
+                    buzzer_tone(500, 1000); // 500 Hz por 1000 ms
                     break;
                 default: // Desliga os LEDs
                     control_leds(0, 0, 0);
                     break;
             }
+
         }
 
         sleep_ms(100); // delay para evitar leituras repetidas
