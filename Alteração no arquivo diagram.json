@@ -1,6 +1,6 @@
 {
     "version": 1,
-    "author": "Eduardo Lino Silva",
+    "author": "Subgrupo 7",
     "editor": "wokwi",
     "parts": [
       { "type": "board-pi-pico-w", "id": "pico", "top": 92.75, "left": 253.15, "attrs": {} },
