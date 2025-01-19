@@ -39,6 +39,9 @@ Este projeto envolve a utilização de um teclado matricial 4x4, LEDs RGB e um b
 
 <p> Solução trabalhada e resultados obtidos no experimento:</p>
 
+Vídeo ensaio (duração máxima de 3 minutos):
+
+https://drive.google.com/file/d/10mXG62s3nFiGyNd2eNPqTejNK2EDU_iL/view?usp=drive_link
 
 ## 👨‍💻 Contribuidores: 
 - [Adrian Trajano](https://github.com/AdrianTr97)
